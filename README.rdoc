@@ -33,7 +33,7 @@ be one-to-many using a Rails <tt>has_many/belongs_to</tt> association.
 * create the Visit model, and add the appropriate <tt>belongs_to</tt> associations
 * edit the Location model to include the following associations 
   - <tt>has_many :visits</tt>
-  - <tt>has_many :visitors, through: :visits, source: 'User'</tt>
+  - <tt>has_many :visitors, through: :visits, source: 'user'</tt>
   - we want to be able to type <tt>@location.visitors</tt>, which is we have to 
     provide the additional options to the <tt>has_many :through</tt> association
 * edit the User model to in the same way to account for its portion of the association
