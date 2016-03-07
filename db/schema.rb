@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223192307) do
+ActiveRecord::Schema.define(version: 20160307184139) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
@@ -20,11 +20,29 @@ ActiveRecord::Schema.define(version: 20160223192307) do
     t.datetime "end_date"
   end
 
+  create_table "events_locations", id: false, force: :cascade do |t|
+    t.integer "events_id"
+    t.integer "locations_id"
+  end
+
+  add_index "events_locations", ["events_id"], name: "index_events_locations_on_events_id"
+  add_index "events_locations", ["locations_id"], name: "index_events_locations_on_locations_id"
+
   create_table "locations", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.string "tag"
-    t.string "coordinates"
+    t.string  "name"
+    t.string  "description"
+    t.string  "tag"
+    t.string  "coordinates"
+    t.integer "users_id"
+  end
+
+  add_index "locations", ["users_id"], name: "index_locations_on_users_id"
+
+  create_table "participates", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,6 +51,13 @@ ActiveRecord::Schema.define(version: 20160223192307) do
     t.string "email"
     t.string "password_hash"
     t.string "password_salt"
+  end
+
+  create_table "visits", force: :cascade do |t|
+    t.integer  "location_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end

@@ -5,6 +5,9 @@ class CreateLocations < ActiveRecord::Migration
       t.string :description
       t.string :tag
       t.string :coordinates
+      
+      # update the locations migration to include a 't.belongs_to' reference to the users table.
+      t.belongs_to :users, index: true
     end
   end
 end
