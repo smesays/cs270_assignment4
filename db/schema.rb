@@ -18,7 +18,10 @@ ActiveRecord::Schema.define(version: 20160307184139) do
     t.string   "description"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.integer  "users_id"
   end
+
+  add_index "events", ["users_id"], name: "index_events_on_users_id"
 
   create_table "events_locations", id: false, force: :cascade do |t|
     t.integer "events_id"
@@ -45,6 +48,9 @@ ActiveRecord::Schema.define(version: 20160307184139) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "participates", ["event_id"], name: "index_participates_on_event_id"
+  add_index "participates", ["user_id"], name: "index_participates_on_user_id"
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -59,5 +65,8 @@ ActiveRecord::Schema.define(version: 20160307184139) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "visits", ["location_id"], name: "index_visits_on_location_id"
+  add_index "visits", ["user_id"], name: "index_visits_on_user_id"
 
 end

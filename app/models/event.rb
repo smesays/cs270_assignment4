@@ -6,7 +6,7 @@ class Event < ActiveRecord::Base
     # 'has_many :users'
     # 'has_many :participants, through: :participates, source: 'user''
     # we want to be able to type '@event.participants', which is we have to provide the additional options to the 'has_many :through' association
-    has_many :users
+    has_many :participates
     has_many :participants, through: :participates, source: 'user'
     
     # edit the Event model to read 'belongs_to :owner, class_name: 'User', foreign_key: 'user_id''
